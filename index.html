@@ -61,16 +61,12 @@
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 22px}
   .brand{display:flex;align-items:center;gap:12px}
   .brand img{height:56px;width:auto;display:block}
-  .crest{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;padding:14px;flex:none;
-    background:radial-gradient(circle at 50% 50%, rgba(246,241,230,.16) 0%, rgba(246,241,230,.09) 45%, rgba(246,241,230,0) 72%)}
+  .crest{display:inline-flex;align-items:center;justify-content:center;flex:none}
   .brand span{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em;text-transform:uppercase}
   nav#primary-nav ul{display:flex;align-items:center;gap:26px;list-style:none;font-size:13.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
   nav#primary-nav a{opacity:.72;transition:opacity .2s,color .2s;padding:4px 2px}
   nav#primary-nav a:hover{opacity:1;color:var(--orange-deep)}
-  @media (min-width:901px) and (max-width:1150px){
-    nav#primary-nav ul{gap:18px;font-size:12.5px}
-    .nav-cta{padding:11px 15px;font-size:12px}
-  }
+  
   .nav-cta{
     background:var(--orange);color:var(--ink);padding:9px 18px;border-radius:3px;
     font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1;
@@ -80,7 +76,7 @@
   .menu-btn{display:none;background:none;border:1px solid var(--line-ink);color:var(--ink);
     padding:10px 16px;border-radius:3px;font-weight:700;font-size:13px;letter-spacing:.04em;cursor:pointer;
     font-family:var(--body);text-transform:uppercase}
-  @media (max-width:900px){
+  @media (max-width:1024px){
     nav#primary-nav ul,.nav-cta{display:none}
     .menu-btn{display:block}
     nav#primary-nav.open ul{
@@ -342,10 +338,10 @@
   .cta-actions{display:flex;flex-wrap:wrap;gap:14px}
 
   /* ---------- FOOTER ---------- */
-  footer{background:var(--ink);color:var(--paper);padding:64px 0 32px}
+  footer{background:#463c30;color:var(--paper);padding:64px 0 32px}
   .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:36px;padding-bottom:36px;border-bottom:1px solid var(--line)}
   .foot-brand{display:flex;align-items:center;gap:14px}
-  .foot-brand .crest img{height:60px;width:auto;display:block}
+  .foot-brand .crest img{height:84px;width:auto;display:block}
   .foot-cols{display:flex;flex-wrap:wrap;gap:56px}
   .foot-col h4{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:14px}
   .foot-col a,.foot-col span{display:block;font-size:14px;opacity:.82;margin-bottom:9px}
@@ -354,7 +350,7 @@
   .foot-social svg{width:16px;height:16px;flex:none}
   .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:26px;font-size:12.5px;opacity:.55}
   .foot-word{font-family:var(--display);font-weight:700;font-size:clamp(48px,11vw,150px);letter-spacing:-.03em;
-    line-height:.85;margin-top:44px;color:var(--graphite);text-transform:uppercase;user-select:none}
+    line-height:.85;margin-top:44px;color:rgba(21,17,12,.22);text-transform:uppercase;user-select:none}
 
   /* ---------- REVEAL / MOTION ---------- */
   .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
@@ -536,7 +532,7 @@
         <span class="k">Where to find us</span>
         <div class="venue">Magnus Community Sports Centre</div>
         <div class="addr">Bowbridge Road, Newark-on-Trent,<br>Newark NG24 4AB</div>
-        <p class="perk">Club members get a <b>discount with RGK</b> on sport wheelchairs and equipment — just ask a coach when you join.</p>
+        <p class="perk">Club members get a <b>discount with RGK wheelchairs</b> on sport wheelchairs and equipment — just ask a coach when you join.</p>
       </div>
     </div>
 
