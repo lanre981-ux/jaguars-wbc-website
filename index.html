@@ -410,7 +410,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a class="nav-cta" href="#sponsor">Partner</a>
+    <a class="nav-cta" href="#sponsor" id="ctaNavPartner">Partner</a>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
   </div>
 </header>
@@ -494,7 +494,7 @@
           <li>Social media thank-you and tag</li>
           <li>Recognition in game day communications</li>
         </ul>
-        <a class="btn btn-ghost-light" href="#contact">Enquire</a>
+        <a class="btn btn-ghost-light" href="#contact" id="ctaTierSupporter">Enquire</a>
       </div>
       <div class="tier feat reveal">
         <div class="ribbon">Most impact</div>
@@ -505,7 +505,7 @@
           <li>Branding at home fixtures</li>
           <li>Feature in our sponsor announcement</li>
         </ul>
-        <a class="btn btn-orange" href="#contact">Start a conversation</a>
+        <a class="btn btn-orange" href="#contact" id="ctaTierPartner">Start a conversation</a>
       </div>
       <div class="tier reveal">
         <div class="ribbon">&nbsp;</div>
@@ -515,7 +515,7 @@
           <li>Bespoke partnership &amp; activation plan</li>
           <li>Dedicated point of contact at the club</li>
         </ul>
-        <a class="btn btn-ghost-light" href="#contact">Enquire</a>
+        <a class="btn btn-ghost-light" href="#contact" id="ctaTierHeadline">Enquire</a>
       </div>
     </div>
   </div>
@@ -805,6 +805,7 @@
   <h3 id="enquiryTitle">Start your first session</h3>
   <p class="modal-note" id="enquiryNote">Tell us a bit about you and we'll help you find the right session to come along to.</p>
   <form id="enquiryForm">
+    <input type="hidden" name="tier">
     <label>Name<input type="text" name="name" required></label>
     <label>Company / organisation <span class="opt">(if relevant)</span><input type="text" name="company"></label>
     <label>Email<input type="email" name="email" required></label>
@@ -843,22 +844,30 @@
   const enquiryNote = document.getElementById('enquiryNote');
   const enquiryForm = document.getElementById('enquiryForm');
 
-  function openEnquiry(subject, title, note){
+  const enquiryTierField = enquiryForm.elements['tier'];
+  const partnerNote = "Tell us about your business and how you'd like to get involved — we'll come back to you with the right options.";
+
+  function openEnquiry(subject, title, note, tier){
     enquiryTitle.textContent = title;
     enquiryNote.textContent = note;
     enquiryForm.dataset.subject = subject;
+    enquiryTierField.value = tier || '';
     enquiryModal.showModal();
   }
-  const ctaStartSession = document.getElementById('ctaStartSession');
-  ctaStartSession&&ctaStartSession.addEventListener('click', e=>{
-    e.preventDefault();
-    openEnquiry('Session enquiry — Jaguars WBC','Start your first session',"Tell us a bit about you and we'll help you find the right session to come along to.");
-  });
-  const ctaPartner = document.getElementById('ctaPartner');
-  ctaPartner&&ctaPartner.addEventListener('click', e=>{
-    e.preventDefault();
-    openEnquiry('Partnership enquiry — Jaguars WBC','Partner with us',"Tell us about your business and how you'd like to get involved — we'll come back to you with the right options.");
-  });
+  function wireCta(id, subject, title, note, tier){
+    const el = document.getElementById(id);
+    el&&el.addEventListener('click', e=>{
+      e.preventDefault();
+      openEnquiry(subject, title, note, tier);
+    });
+  }
+  wireCta('ctaStartSession','Session enquiry — Jaguars WBC','Start your first session',"Tell us a bit about you and we'll help you find the right session to come along to.");
+  wireCta('ctaPartner','Partnership enquiry — Jaguars WBC','Partner with us',partnerNote);
+  wireCta('ctaNavPartner','Partnership enquiry — Jaguars WBC','Partner with us',partnerNote);
+  wireCta('ctaTierSupporter','Partnership enquiry — Jaguars WBC','Partner with us',partnerNote,'Supporter');
+  wireCta('ctaTierPartner','Partnership enquiry — Jaguars WBC','Partner with us',partnerNote,'Team Partner');
+  wireCta('ctaTierHeadline','Partnership enquiry — Jaguars WBC','Partner with us',partnerNote,'Headline Sponsor');
+
   document.getElementById('enquiryClose').addEventListener('click', ()=>enquiryModal.close());
   enquiryModal.addEventListener('keydown', e=>{ if(e.key==='Escape'){ e.preventDefault(); enquiryModal.close(); } });
   enquiryModal.addEventListener('click', e=>{ if(e.target===enquiryModal) enquiryModal.close(); });
@@ -870,6 +879,7 @@
       (data.get('company')||'').trim() ? `Company / organisation: ${data.get('company').trim()}` : null,
       `Email: ${(data.get('email')||'').trim()}`,
       (data.get('phone')||'').trim() ? `Phone: ${data.get('phone').trim()}` : null,
+      (data.get('tier')||'').trim() ? `Interested tier: ${data.get('tier').trim()}` : null,
       (data.get('message')||'').trim() ? `\nMessage:\n${data.get('message').trim()}` : null
     ].filter(Boolean);
     const subject = enquiryForm.dataset.subject || 'Enquiry — Jaguars WBC';
