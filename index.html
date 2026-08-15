@@ -362,6 +362,33 @@
     html{scroll-behavior:auto}
   }
 
+  /* ---------- ENQUIRY MODAL ---------- */
+  .modal{
+    border:none;border-radius:8px;padding:40px 36px;max-width:440px;width:calc(100% - 48px);
+    max-height:88vh;overflow-y:auto;
+    background:var(--paper);color:var(--ink);box-shadow:0 30px 70px rgba(21,17,12,.4);
+  }
+  .modal::backdrop{background:rgba(21,17,12,.72)}
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--line-ink);background:none;color:var(--ink);font-size:20px;line-height:1;
+    cursor:pointer;display:grid;place-items:center;transition:background .2s;
+  }
+  .modal-close:hover{background:var(--chalk)}
+  .modal h3{font-size:clamp(24px,3vw,28px);margin-top:14px}
+  .modal-note{font-size:14.5px;opacity:.75;margin-top:10px;line-height:1.55;max-width:38ch}
+  .modal form{display:grid;gap:16px;margin-top:26px}
+  .modal label{display:grid;gap:7px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+  .modal label .opt{text-transform:none;letter-spacing:0;font-weight:400}
+  .modal input,.modal textarea{
+    font-family:var(--body);font-size:15px;font-weight:400;text-transform:none;letter-spacing:0;
+    padding:12px 14px;border:1px solid var(--line-ink);border-radius:4px;background:var(--chalk);color:var(--ink);
+    resize:vertical;
+  }
+  .modal input:focus-visible,.modal textarea:focus-visible{outline:none;border-color:var(--orange)}
+  .modal .btn{width:100%;justify-content:center;border:none;margin-top:4px}
+  @media (max-width:520px){.modal{padding:30px 22px}}
+
   :focus-visible{outline:2px solid transparent;outline-offset:3px;border-radius:3px;box-shadow:0 0 0 2px #fff,0 0 0 4px #000}
 </style>
 </head>
@@ -403,7 +430,7 @@
     <p class="hero-lede">East Midlands Premiership Club — over 30 years of impact on and off the court. Whatever your skill level, whatever your ability, we have a place for you.</p>
     <div class="hero-actions">
       <a class="btn btn-orange" href="#join">Come to a session →</a>
-      <a class="btn btn-ghost-dark" href="#sponsor">Partner with us</a>
+      <a class="btn btn-ghost-dark" href="#sponsor" id="ctaPartner">Partner with us</a>
     </div>
   </div>
 </section>
@@ -654,7 +681,7 @@
         <div class="step"><div class="n">2</div><p>Try it out in a loan chair — we'll match you to the right fit.</p></div>
         <div class="step"><div class="n">3</div><p>Keep coming back, and join a squad when you're ready.</p></div>
       </div>
-      <a class="btn btn-orange" href="#contact">Start your first session →</a>
+      <a class="btn btn-orange" href="#contact" id="ctaStartSession">Start your first session →</a>
     </div>
   </div>
 </section>
@@ -772,6 +799,21 @@
   </div>
 </footer>
 
+<dialog class="modal" id="enquiryModal" aria-labelledby="enquiryTitle">
+  <button class="modal-close" id="enquiryClose" type="button" aria-label="Close form">&times;</button>
+  <span class="eyebrow">Get in touch</span>
+  <h3 id="enquiryTitle">Start your first session</h3>
+  <p class="modal-note" id="enquiryNote">Tell us a bit about you and we'll help you find the right session to come along to.</p>
+  <form id="enquiryForm">
+    <label>Name<input type="text" name="name" required></label>
+    <label>Company / organisation <span class="opt">(if relevant)</span><input type="text" name="company"></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Phone <span class="opt">(optional)</span><input type="tel" name="phone"></label>
+    <label>Message <span class="opt">(optional)</span><textarea name="message" rows="3"></textarea></label>
+    <button type="submit" class="btn btn-orange">Send enquiry →</button>
+  </form>
+</dialog>
+
 <script>
   const mb=document.getElementById('menuBtn'), nv=document.getElementById('primary-nav');
   mb&&mb.addEventListener('click',()=>{
@@ -795,6 +837,47 @@
       slides[cur].classList.add('active');
     }, 4500);
   }
+
+  const enquiryModal = document.getElementById('enquiryModal');
+  const enquiryTitle = document.getElementById('enquiryTitle');
+  const enquiryNote = document.getElementById('enquiryNote');
+  const enquiryForm = document.getElementById('enquiryForm');
+
+  function openEnquiry(subject, title, note){
+    enquiryTitle.textContent = title;
+    enquiryNote.textContent = note;
+    enquiryForm.dataset.subject = subject;
+    enquiryModal.showModal();
+  }
+  const ctaStartSession = document.getElementById('ctaStartSession');
+  ctaStartSession&&ctaStartSession.addEventListener('click', e=>{
+    e.preventDefault();
+    openEnquiry('Session enquiry — Jaguars WBC','Start your first session',"Tell us a bit about you and we'll help you find the right session to come along to.");
+  });
+  const ctaPartner = document.getElementById('ctaPartner');
+  ctaPartner&&ctaPartner.addEventListener('click', e=>{
+    e.preventDefault();
+    openEnquiry('Partnership enquiry — Jaguars WBC','Partner with us',"Tell us about your business and how you'd like to get involved — we'll come back to you with the right options.");
+  });
+  document.getElementById('enquiryClose').addEventListener('click', ()=>enquiryModal.close());
+  enquiryModal.addEventListener('keydown', e=>{ if(e.key==='Escape'){ e.preventDefault(); enquiryModal.close(); } });
+  enquiryModal.addEventListener('click', e=>{ if(e.target===enquiryModal) enquiryModal.close(); });
+  enquiryForm.addEventListener('submit', e=>{
+    e.preventDefault();
+    const data = new FormData(enquiryForm);
+    const lines = [
+      `Name: ${(data.get('name')||'').trim()}`,
+      (data.get('company')||'').trim() ? `Company / organisation: ${data.get('company').trim()}` : null,
+      `Email: ${(data.get('email')||'').trim()}`,
+      (data.get('phone')||'').trim() ? `Phone: ${data.get('phone').trim()}` : null,
+      (data.get('message')||'').trim() ? `\nMessage:\n${data.get('message').trim()}` : null
+    ].filter(Boolean);
+    const subject = enquiryForm.dataset.subject || 'Enquiry — Jaguars WBC';
+    const mailto = `mailto:JaguarsWBC@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    window.location.href = mailto;
+    enquiryModal.close();
+    enquiryForm.reset();
+  });
 </script>
 </body>
 </html>
