@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jaguars Wheelchair Basketball Club</title>
+
 <meta name="description" content="Jaguars Wheelchair Basketball Club — full-contact, full-speed wheelchair basketball. Competitive squads, open training, and partnership opportunities.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -351,7 +352,30 @@
   .foot-col a:hover{opacity:1;color:var(--orange)}
   .foot-col a.foot-social{display:flex;align-items:center;gap:9px}
   .foot-social svg{width:16px;height:16px;flex:none}
-  .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding-top:26px;font-size:12.5px;opacity:.55}
+  .foot-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:26px;font-size:12.5px;opacity:.55}
+  .biglan-credit{display:inline-flex;align-items:center;gap:11px;color:inherit;text-decoration:none;font-size:16px}
+  .biglan-credit strong{font-weight:600}
+  .biglan-credit:hover{color:var(--orange)}
+  .biglan-credit .biglan-sun{flex:none}
+  .biglan-section{background:var(--chalk);color:var(--ink);padding:30px 0;border-top:1px solid var(--line-ink)}
+  .biglan-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+  .biglan-line{display:flex;align-items:center;gap:14px;min-width:0}
+  .biglan-strip-sun{flex:none}
+  .biglan-strip-copy{min-width:0}
+  .biglan-strip-text{margin:0;font-size:16px;color:var(--ink);line-height:1.4}
+  .biglan-strip-text strong{font-weight:600;color:var(--ink)}
+  .biglan-strip-sub{margin:4px 0 0;font-size:14px;color:var(--graphite);line-height:1.45;max-width:52ch}
+  .biglan-strip .btn{flex:none}
+  .biglan-form-wrap{margin-top:26px;max-width:520px}
+  .biglan-form{display:flex;flex-direction:column;gap:14px}
+  .biglan-form label{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+  .biglan-form .opt{text-transform:none;font-weight:400;opacity:.6;letter-spacing:0}
+  .biglan-form .btn{width:100%;justify-content:center;margin-top:4px}
+  .biglan-hp{position:absolute;left:-9999px}
+  .biglan-status{font-family:var(--body);font-size:14px;margin:4px 0 0;min-height:1em}
+  .biglan-status.ok{color:#2e7d32}
+  .biglan-status.err{color:#b23b2e}
+  @media(max-width:820px){.biglan-grid{grid-template-columns:1fr;gap:32px}}
   .foot-word{font-family:var(--display);font-weight:700;font-size:clamp(48px,11vw,150px);letter-spacing:-.03em;
     line-height:.85;margin-top:44px;color:rgba(21,17,12,.22);text-transform:uppercase;user-select:none}
 
@@ -776,6 +800,45 @@
   </div>
 </section>
 
+<section class="biglan-section" id="biglan-work">
+  <div class="wrap biglan-strip reveal">
+    <div class="biglan-line">
+      <svg class="biglan-strip-sun" viewBox="0 0 40 40" width="50" height="50" aria-hidden="true">
+        <g transform="translate(20,20)" stroke="#ef6c0e" stroke-width="2" stroke-linecap="round">
+          <line x1="0" y1="-18" x2="0" y2="-14"/><line x1="12.7" y1="-12.7" x2="9.9" y2="-9.9"/>
+          <line x1="18" y1="0" x2="14" y2="0"/><line x1="12.7" y1="12.7" x2="9.9" y2="9.9"/>
+          <line x1="-12.7" y1="-12.7" x2="-9.9" y2="-9.9"/><line x1="-18" y1="0" x2="-14" y2="0"/>
+          <line x1="-12.7" y1="12.7" x2="-9.9" y2="9.9"/>
+        </g>
+        <g transform="translate(20,20)">
+          <circle r="11" fill="#ef6c0e"/>
+          <circle cx="-3.7" cy="-2.3" r="1.4" fill="#fff"/>
+          <path d="M2.2,-2.6 Q3.9,-4.6 5.6,-3" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M-5.2,1.9 Q0,7.8 5.2,1.9" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="biglan-strip-copy">
+        <p class="biglan-strip-text">Designed &amp; built by <strong>Big Lan Productions</strong></p>
+        <p class="biglan-strip-sub">Want a website, brand or content for your club, business or project? Drop a message and we'll get back to you.</p>
+      </div>
+    </div>
+    <button type="button" class="btn btn-ink" id="biglanToggle" aria-expanded="false" aria-controls="biglanForm">Get in touch</button>
+  </div>
+  <div class="wrap biglan-form-wrap" id="biglanFormWrap" hidden>
+    <form id="biglanForm" class="biglan-form">
+      <input type="hidden" name="access_key" value="b6b55083-7626-4ed0-baea-060ff904ede1">
+      <input type="hidden" name="subject" value="New enquiry via Big Lan Productions site">
+      <input type="hidden" name="from_name" value="Jaguars WBC website">
+      <input type="checkbox" name="botcheck" class="biglan-hp" style="display:none" tabindex="-1" autocomplete="off">
+      <label>Name<input type="text" name="name" required></label>
+      <label>Email<input type="email" name="email" required></label>
+      <label>What do you need? <span class="opt">(a few words)</span><textarea name="message" rows="3" required></textarea></label>
+      <button type="submit" class="btn btn-ink">Send enquiry →</button>
+      <p class="biglan-status" id="biglanStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
 <footer id="contact">
   <div class="wrap">
     <div class="foot-top">
@@ -812,7 +875,23 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 Jaguars Wheelchair Basketball Club</span>
-      <span>Wheelchair Basketball in Newark-on-Trent</span>
+      <a class="biglan-credit" href="#biglan-work" aria-label="Designed and built by Big Lan Productions — get in touch">
+        <svg class="biglan-sun" viewBox="0 0 40 40" width="42" height="42" aria-hidden="true">
+          <g transform="translate(20,20)" stroke="#ef6c0e" stroke-width="1.8" stroke-linecap="round">
+            <line x1="0" y1="-18" x2="0" y2="-14"/><line x1="12.7" y1="-12.7" x2="9.9" y2="-9.9"/>
+            <line x1="18" y1="0" x2="14" y2="0"/><line x1="12.7" y1="12.7" x2="9.9" y2="9.9"/>
+            <line x1="-12.7" y1="-12.7" x2="-9.9" y2="-9.9"/><line x1="-18" y1="0" x2="-14" y2="0"/>
+            <line x1="-12.7" y1="12.7" x2="-9.9" y2="9.9"/>
+          </g>
+          <g transform="translate(20,20)">
+            <circle r="11" fill="#ef6c0e"/>
+            <circle cx="-3.7" cy="-2.3" r="1.4" fill="#fff"/>
+            <path d="M2.2,-2.6 Q3.9,-4.6 5.6,-3" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M-5.2,1.9 Q0,7.8 5.2,1.9" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <span>Designed &amp; built by <strong>Big Lan Productions</strong></span>
+      </a>
     </div>
     <div class="foot-word" aria-hidden="true">Jaguars</div>
   </div>
@@ -907,6 +986,57 @@
     enquiryModal.close();
     enquiryForm.reset();
   });
+
+  const biglanToggle = document.getElementById('biglanToggle');
+  const biglanFormWrap = document.getElementById('biglanFormWrap');
+  if(biglanToggle && biglanFormWrap){
+    biglanToggle.addEventListener('click', ()=>{
+      const open = biglanFormWrap.hasAttribute('hidden');
+      if(open){
+        biglanFormWrap.removeAttribute('hidden');
+        biglanToggle.setAttribute('aria-expanded','true');
+        biglanToggle.textContent='Close';
+        biglanFormWrap.querySelector('input[name=name]').focus();
+      }else{
+        biglanFormWrap.setAttribute('hidden','');
+        biglanToggle.setAttribute('aria-expanded','false');
+        biglanToggle.textContent='Get in touch';
+      }
+    });
+  }
+
+  const biglanForm = document.getElementById('biglanForm');
+  const biglanStatus = document.getElementById('biglanStatus');
+  if(biglanForm){
+    biglanForm.addEventListener('submit', async e=>{
+      e.preventDefault();
+      biglanStatus.className='biglan-status';
+      biglanStatus.textContent='Sending…';
+      const btn = biglanForm.querySelector('button[type=submit]');
+      btn.disabled = true;
+      try{
+        const res = await fetch('https://api.web3forms.com/submit',{
+          method:'POST',
+          headers:{'Accept':'application/json'},
+          body:new FormData(biglanForm)
+        });
+        const out = await res.json();
+        if(out.success){
+          biglanStatus.className='biglan-status ok';
+          biglanStatus.textContent='Thanks — your message has been sent. We’ll be in touch soon.';
+          biglanForm.reset();
+        }else{
+          biglanStatus.className='biglan-status err';
+          biglanStatus.textContent='Something went wrong. Please email biglanproductions@gmail.com directly.';
+        }
+      }catch(err){
+        biglanStatus.className='biglan-status err';
+        biglanStatus.textContent='Could not send right now. Please email biglanproductions@gmail.com directly.';
+      }finally{
+        btn.disabled = false;
+      }
+    });
+  }
 </script>
 </body>
 </html>
